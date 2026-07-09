@@ -1,0 +1,23 @@
+ ##################### اضافه کردن دیتا edit1 ########################
+    # جدول امور مالی
+    c.execute('''CREATE TABLE IF NOT EXISTS financial (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        national_code TEXT,
+        full_name TEXT,
+        type TEXT,
+        amount INTEGER,
+        description TEXT,
+        date TEXT
+    )''')
+    # اضافه کردن رانندگان نمونه
+    sample_drivers = [
+        ('1234567890', 'علی رضایی','', '250000', '09123456789',''),
+        ('0987654321', 'مریم کریمی','', '300000', '09214567890',''),
+        ('1111222233', 'رضا احمدی', '','۵۵۴۴۳۳-۲۱', '09321456987',''),
+    ]
+    c.executemany('INSERT OR IGNORE INTO financial (national_code, full_name, type, amount,description,date) VALUES (?, ?, ?, ?,?,?)',
+                  sample_drivers)
+
+    conn.commit()
+    conn.close()
+    print("✅ دیتابیس آماده شد")

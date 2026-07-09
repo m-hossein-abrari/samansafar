@@ -1,0 +1,10 @@
+ if doc_type == "complaint":
+        pdf.set_text_color(0, 0, 0)
+        pdf.set_font('PersianFont', '', 16)
+        pdf.ln(1)
+    pdf.multi_cell(0, 10, data.get('national_code', ''), "کد ملی:", ln=True, align='C')
+    pdf.multi_cell(0, 10, data.get('full_name', ''),"نام:", ln=True, align='C')
+    pdf.multi_cell(0, 10, data.get('complaint_type', ''), "نوع شکایت:", ln=True, align='C')
+    pdf.multi_cell(0, 10, data.get('request_date', ''), "تاریخ ثبت:", ln=True, align='C')
+    pdf.multi_cell(0, 10, data.get('description', ''),"شرح:", ln=True, align='C')
+    # pdf.multi_cell(0, 10, data.get('national_code', ''), "کد ملی:", align='R')

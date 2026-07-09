@@ -1,0 +1,66 @@
+
+    # if doc_type == "vacation":
+
+        fields = []
+            #(
+            #(data.get('national_code', ''), "کد ملی:"),
+            #(data.get('full_name', ''), "نام:"),
+            #  (data.get('plate_number', ''),"پلاک:" ),
+            #  (data.get('destination', ''),"مقصد:" ),
+            #   (data.get('start_date', ''),"تاریخ شروع:" ),
+            #   (f"{data.get('duration', 0)} روز","مدت:" ),
+            # ("تاریخ ثبت:", data.get('request_date', datetime.now().strftime("%Y-%m-%d %H:%M")))
+            # (data.get('', ''),"پلیس راه کشور"),
+            # (data.get('national_code', ''),"شماره ملی "),(data.get('full_name', ''),"بدینوسیله اعلام می گردد درخواست مرخصی آقای/ خانم "))
+            # ("بلامانع می باشد",data.get('start_date', ''),"از تاریخ",f"{data.get('duration', 0)} روز","به مدت",data.get('destination', ''),"به مقصد",data.get('plate_number', ''),"خودرو به شماره انتظامی")
+            # pdf.cell(0, 10, data.get('national_code', ''),"شماره ملی ",data.get('full_name', ''),"بدینوسیله اعلام می گردد درخواست مرخصی آقای/ خانم ", ln=1, align='L')
+            # )
+
+    elif doc_type == "complaint":
+         fields = [
+         ( data.get('national_code', ''), "کد ملی:"),
+        ( data.get('full_name', ''), "نام:"),
+        ( data.get('complaint_type', ''), "نوع شکایت:"),
+            ( data.get('request_date', ''), "تاریخ ثبت:"),
+            ( data.get('description', ''), "شرح:")
+                  ]
+        else:  # lost
+        fields = [
+            ( data.get('national_code', ''),"کد ملی:"),
+            ( data.get('full_name', ''),"نام:"),
+            ( data.get('item_name', ''),"شیء گمشده:"),
+            ( data.get('description', ''),"توضیحات:"),
+            ( data.get('location', ''),"مکان:"),
+            ( data.get('date_lost', ''),"تاریخ گم شدن:"),
+            ( data.get('contact_phone', ''),"شماره تماس:"),
+            ( data.get('request_date', ''),"تاریخ ثبت:")
+        ]
+
+
+
+
+#-----------------------------------------------------------------------------------------
+        # کادر
+        y = pdf.get_y()
+        # pdf.set_line_width(1)
+        # pdf.set_draw_color(0, 51, 102)
+        # pdf.rect(15, y, 180, (len(fields) + 2) * 10 + 5)
+
+        # pdf.set_font('PersianFont', '', 14)
+        # pdf.set_text_color(0, 51, 102)
+        pdf.set_y(y + 5)
+        # pdf.cell(0, 10, reshape_text("اطلاعات ثبت شده"), ln=True, align='C')
+        # pdf.set_text_color(0, 0, 0)
+        # pdf.set_font('PersianFont', '', 12)
+        # =====نوشته ها
+        y = pdf.get_y()
+        for i, (label, value) in enumerate(fields):
+            pdf.set_y(y + (i + 1) * 8 + 2)
+            pdf.set_x(90)  # فاصله نوشته ها از سمت صفحه
+            pdf.cell(50, 8, reshape_text(label), ln=False, align='R')
+            pdf.set_x(80)
+            pdf.cell(0, 8, reshape_text(str(value)), ln=True, align='R')
+
+        y = pdf.get_y() + 1
+   #---------------------------------------------------------------------------------------------------
+
